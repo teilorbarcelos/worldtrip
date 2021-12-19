@@ -13,6 +13,7 @@ export default function Banner() {
       align="center"
       bgImage="/background.png"
       bgRepeat="no-repeat"
+      bgSize={["cover", "unset"]}
     >
       <HStack
         justify="space-between"
@@ -48,6 +49,7 @@ export default function Banner() {
               src="/airplane.svg"
               alt="Airplane image illustration"
               maxW={417}
+              mt="76px"
             />
           </Stack>
         }
