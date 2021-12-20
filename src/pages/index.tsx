@@ -1,11 +1,24 @@
-import { Flex, Stack, Text } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import { Flex, Text } from '@chakra-ui/react'
+import type { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner'
 import { Divider } from '../components/Divider'
 import Header from '../components/Header'
+import { MySwiper } from '../components/MySwiper'
 import TravelType from '../components/TravelType'
+import { api } from './api'
 
-const Home: NextPage = () => {
+interface ContinentProps {
+  slug: string
+  name: string
+  title: string
+  swiperImage: string
+}
+
+interface Props {
+  continents: ContinentProps[]
+}
+
+export default function Home({ continents }: Props) {
   return (
     <Flex
       direction="column"
@@ -29,8 +42,19 @@ const Home: NextPage = () => {
         Vamos nessa? <br />
         Então escolha seu continente
       </Text>
+
+      <MySwiper continents={continents} />
     </Flex>
   )
 }
 
-export default Home
+export const getStaticProps: GetStaticProps = async () => { // para SSG (Static)
+  const continents = await (await api.get('/continents')).data
+
+  return {
+    props: {
+      continents
+    },
+    revalidate: 60 * 60 * 24 // time to generate new page (one time a day) (Only for SSG)
+  }
+}
