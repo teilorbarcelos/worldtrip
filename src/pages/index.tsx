@@ -1,8 +1,9 @@
-import { Flex, Stack, Text } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Banner from '../components/Banner'
 import { Divider } from '../components/Divider'
 import Header from '../components/Header'
+import { MySwiper } from '../components/MySwiper'
 import TravelType from '../components/TravelType'
 
 const Home: NextPage = () => {
@@ -29,6 +30,8 @@ const Home: NextPage = () => {
         Vamos nessa? <br />
         Então escolha seu continente
       </Text>
+
+      <MySwiper />
     </Flex>
   )
 }
