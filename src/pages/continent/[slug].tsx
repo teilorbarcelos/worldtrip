@@ -1,5 +1,6 @@
 import { Stack } from "@chakra-ui/react"
 import { GetStaticProps } from "next"
+import ContinentBanner from "../../components/ContinentBanner"
 import Header from "../../components/Header"
 import { api } from "../api"
 
@@ -31,7 +32,10 @@ export default function Continent({ continent }: Props) {
     <Stack>
       <Header />
 
-
+      <ContinentBanner
+        image={continent.swiperImage}
+        name={continent.name}
+      />
     </Stack>
   )
 }
