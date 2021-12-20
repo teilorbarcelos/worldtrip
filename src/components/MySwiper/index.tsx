@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
-import { ReactNode } from 'react'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import Link from 'next/link'
 
@@ -10,11 +9,18 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-interface Props {
-  children: ReactNode
+interface ContinentProps {
+  slug: string
+  name: string
+  title: string
+  swiperImage: string
 }
 
-export function MySwiper() {
+interface Props {
+  continents: ContinentProps[]
+}
+
+export function MySwiper({ continents }: Props) {
   return (
     <Box
       w='100%'
@@ -36,45 +42,49 @@ export function MySwiper() {
           delay: 4000,
         }}
       >
-        <SwiperSlide>
-          <Flex
-            bgImage={`/europa.png`}
-            bgRepeat="no-repeat"
-            bgSize="cover"
-            w="100%"
-            h="100%"
-            justify="center"
-            align="center"
-          >
-            <Link
-              href={`/continent/europa`}
-            >
-              <a>
-                <Stack
-                  spacing={[3, 4]}
+        {
+          continents.map(continent => (
+            <SwiperSlide key={continent.slug}>
+              <Flex
+                bgImage={continent.swiperImage}
+                bgRepeat="no-repeat"
+                bgSize="cover"
+                w="100%"
+                h="100%"
+                justify="center"
+                align="center"
+              >
+                <Link
+                  href={`/continent/${continent.slug}`}
                 >
-                  <Text
-                    fontWeight="bold"
-                    fontSize={["24px", "48px"]}
-                    color="white.500"
-                    textAlign="center"
-                  >
-                    Europa
-                  </Text>
+                  <a>
+                    <Stack
+                      spacing={[3, 4]}
+                    >
+                      <Text
+                        fontWeight="bold"
+                        fontSize={["24px", "48px"]}
+                        color="white.500"
+                        textAlign="center"
+                      >
+                        {continent.name}
+                      </Text>
 
-                  <Text
-                    fontWeight="bold"
-                    fontSize={["14px", "24px"]}
-                    color="white.500"
-                    textAlign="center"
-                  >
-                    O continente mais antigo.
-                  </Text>
-                </Stack>
-              </a>
-            </Link>
-          </Flex>
-        </SwiperSlide>
+                      <Text
+                        fontWeight="bold"
+                        fontSize={["14px", "24px"]}
+                        color="white.500"
+                        textAlign="center"
+                      >
+                        {continent.title}
+                      </Text>
+                    </Stack>
+                  </a>
+                </Link>
+              </Flex>
+            </SwiperSlide>
+          ))
+        }
       </Swiper>
     </Box>
   )
