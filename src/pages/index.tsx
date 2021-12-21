@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react'
-import type { GetStaticProps, NextPage } from 'next'
+import type { GetStaticProps } from 'next'
 import Banner from '../components/Banner'
 import { Divider } from '../components/Divider'
 import Header from '../components/Header'
