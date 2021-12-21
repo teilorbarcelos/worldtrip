@@ -1,6 +1,7 @@
 import { VStack } from "@chakra-ui/react"
 import { GetStaticProps } from "next"
 import ContinentBanner from "../../components/Continent/Banner"
+import { Cities } from "../../components/Continent/Cities"
 import { Description } from "../../components/Continent/Description"
 import Header from "../../components/Header"
 import { api } from "../api"
@@ -41,6 +42,8 @@ export default function Continent({ continent }: Props) {
       <Description
         continent={continent}
       />
+
+      <Cities continent={continent} />
     </VStack>
   )
 }

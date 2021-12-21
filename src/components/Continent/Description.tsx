@@ -1,11 +1,19 @@
-import { Flex, Text, VStack } from "@chakra-ui/react"
+import { Flex, Text, Tooltip, VStack } from "@chakra-ui/react"
 import { FiInfo } from 'react-icons/fi'
+
+interface CityProps {
+  cityName: string
+  countryName: string
+  countryCode: string
+  cityImage: string
+}
 
 interface ContinentProps {
   description: string
   numberOfCountries: number
   numberOfLanguages: number
   amountMostPopularCities: number
+  mostPopularCities: CityProps[]
 }
 
 interface Props {
@@ -98,8 +106,29 @@ export function Description({ continent }: Props) {
             fontSize={["18px", "24px"]}
             lineHeight="25px"
             gap="5px"
+            alignItems="center"
           >
-            cidades +100 <FiInfo style={{ opacity: '50%' }} />
+            cidades +100
+            <Flex
+              direction="column-reverse"
+              fontSize={["10px", "16px"]}
+            >
+              <Tooltip
+                label={
+                  continent.mostPopularCities.map((city, index) => {
+                    if (index === continent.mostPopularCities.length - 1) {
+                      return `${city.cityName}.`
+                    }
+                    return `${city.cityName}, `
+                  })
+                }
+                fontSize='md'
+              >
+                <Text as="span">
+                  <FiInfo style={{ opacity: '50%' }} />
+                </Text>
+              </Tooltip>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
